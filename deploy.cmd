@@ -104,12 +104,11 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
-:: 4. Build the web client
+:: 3. Install npm packages
 IF EXIST "%DEPLOYMENT_TARGET%\buildScripts\build.js" (
   pushd "%DEPLOYMENT_TARGET%"
-  echo "Building web site using Gulp"
-  call :ExecuteCmd !NPM_CMD! build
-  if !ERRORLEVEL! NEQ 0 goto error
+  call :ExecuteCmd !NPM_CMD! run build
+  IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
